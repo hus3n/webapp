@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webapp-hafalan
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:./database.sqlite
+    volumes:
+      - ./database.sqlite:/app/database.sqlite
+      - ./database.sqlite-wal:/app/database.sqlite-wal
+      - ./database.sqlite-shm:/app/database.sqlite-shm
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
