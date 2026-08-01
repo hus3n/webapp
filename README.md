@@ -80,6 +80,23 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 MURAJAAH_INTERVALS=3,7,14,30
 ```
 
+> 💡 **Penjelasan Mengenai `NEXTAUTH_SECRET`**:
+> `NEXTAUTH_SECRET` **bukanlah Kunci/API Key yang harus Anda minta dari Vercel atau pihak ketiga**. Ini adalah **string acak rahasia yang Anda buat sendiri** untuk mengenkripsi cookie sesi login pengguna di browser.
+> 
+> **Cara Cepat Membuat String `NEXTAUTH_SECRET`**:
+> - **Menggunakan Terminal (Linux/Mac/Git Bash)**:
+>   ```bash
+>   openssl rand -base64 32
+>   ```
+> - **Menggunakan Node.js (Windows / Semua OS)**:
+>   ```bash
+>   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+>   ```
+> - **Menggunakan Web Generator (Otomatis)**:
+>   Buka tautan ini di browser: 👉 [generate-secret.vercel.app/32](https://generate-secret.vercel.app/32)
+> 
+> Salin string acak yang muncul, lalu tempelkan ke file `.env` pada baris `NEXTAUTH_SECRET=...`.
+
 ### 4. Generasi Schema & Seed Database
 Jalankan perintah berikut untuk menginisialisasi tabel database SQLite dan mengisinya dengan data awal (*seed data*):
 ```bash
